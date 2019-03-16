@@ -15,8 +15,6 @@ import com.udacity.sandwichclub.utils.JsonUtils;
 
 import org.json.JSONException;
 
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.List;
 
 public class DetailActivity extends AppCompatActivity {
@@ -72,6 +70,7 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     private void populateUI() {
+        //Declaration and initialization of necessary UI elements
         Uri uri;
         ImageView imageView = findViewById(R.id.image_iv);
         TextView lblAKA = findViewById(R.id.also_known_lbl),
@@ -82,18 +81,22 @@ public class DetailActivity extends AppCompatActivity {
                  mDescription = findViewById(R.id.description_tv),
                  lblIngredients = findViewById(R.id.ingredients_lbl),
                  mIngredients = findViewById(R.id.ingredients_tv);
-        mAKA.setText("");
-        mIngredients.setText("");
+
+        //parsing and setting image uri
         uri = Uri.parse(sandwich.getImage());
         imageView.setImageURI(uri);
+
+        //setting texts and lists
         setFieldList(lblAKA, mAKA, sandwich.getAlsoKnownAs());
         setFieldText(lblPOO, mPOO, sandwich.getPlaceOfOrigin());
         setFieldText(lblDescription, mDescription, sandwich.getDescription());
         setFieldList(lblIngredients, mIngredients, sandwich.getIngredients());
     }
     public void setFieldText(TextView label, TextView field, String text){
+        //making sure element and its label are visible
         label.setVisibility(View.VISIBLE);
         field.setVisibility(View.VISIBLE);
+        //check if there's no data, using GONE to assure no gaps in layout
         if (text == null || text.equals("")){
             label.setVisibility(View.GONE);
             field.setVisibility(View.GONE);
@@ -101,9 +104,12 @@ public class DetailActivity extends AppCompatActivity {
             field.setText(text);
     }
     public void setFieldList(TextView label, TextView field, List<String> list){
+        //making sure we're not appending to
         field.setText("");
+        //making sure element and its label are visible
         label.setVisibility(View.VISIBLE);
         field.setVisibility(View.VISIBLE);
+        //check if there's no data, using GONE to assure no gaps in layout
         if (list == null || list.size() == 0){
             label.setVisibility(View.GONE);
             field.setVisibility(View.GONE);
