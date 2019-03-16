@@ -12,11 +12,15 @@ import java.util.List;
 public class JsonUtils {
 
     public static Sandwich parseSandwichJson(String json) throws JSONException {
+        //new object to return
         Sandwich sandwich = new Sandwich();
         List<String> sandwichIngredientsList;
         List<String> sandwichAKAList;
+        
+
         JSONObject sandwichObject = new JSONObject(json);
         JSONObject sandwichNameObject = sandwichObject.getJSONObject("name");
+        
         sandwichIngredientsList = convertJsonToList(sandwichObject.getJSONArray("ingredients"));
         sandwichAKAList = convertJsonToList(sandwichNameObject.getJSONArray("alsoKnownAs"));
 
